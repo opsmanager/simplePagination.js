@@ -51,7 +51,7 @@
 			o.halfDisplayed = o.displayedPages / 2;
 
 			this.each(function() {
-				self.addClass(o.cssStyle + ' simple-pagination').data('pagination', o);
+				self.data('pagination', o);
 				methods._draw.call(self);
 			});
 
@@ -272,7 +272,7 @@
 		},
 
 		_appendItem: function(pageIndex, opts) {
-			var self = this, options, $link, o = self.data('pagination'), $linkWrapper = $('<li></li>'), $ul = self.find('ul');
+			var self = this, options, $link, o = self.data('pagination'), $linkWrapper = $('<li class="page"></li>'), $ul = self.find('ul');
 
 			pageIndex = pageIndex < 0 ? 0 : (pageIndex < o.pages ? pageIndex : o.pages - 1);
 
@@ -293,9 +293,9 @@
 				} else {
 					$linkWrapper.addClass('active');
 				}
-				$link = $('<span class="current">' + (options.text) + '</span>');
+				$link = $('<a class="current">' + (options.text) + '</a>');
 			} else {
-				$link = $('<a href="' + o.hrefTextPrefix + (pageIndex + 1) + o.hrefTextSuffix + '" class="page-link">' + (options.text) + '</a>');
+				$link = $('<a href="' + o.hrefTextPrefix + (pageIndex + 1) + o.hrefTextSuffix + '">' + (options.text) + '</a>');
 				$link.click(function(event){
 					return methods._selectPage.call(self, pageIndex, event);
 				});
